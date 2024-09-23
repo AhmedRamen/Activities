@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <typeinfo>
 
 using namespace std;
 void assignmentTwelve(); //get factorial number from input
@@ -9,7 +10,7 @@ void assignmentFourteen(); //create a random number game using a while loop
 int main() {
 	//assignmentTwelve();
 	//assignmentThirteen();
-	//assignmentFourteen();
+	assignmentFourteen();
 	return 0;
 }
 
@@ -67,6 +68,7 @@ void assignmentFourteen() {
 	//init vars
 	int num = rand() % 100;
 	int ans = 0;
+	int hint = 0;
 	int fails = 0;
 	
 	//Start the game
@@ -76,23 +78,35 @@ void assignmentFourteen() {
 		//user input
 		cout << "Your guess: ";
 		cin >> ans;
-		
+
 		//end the game if the guess matches the number
 		if (ans == num) {
 			cout << "You won the game.\nSecret number is: " << num << "\nYou guessed: " << fails <<" times.";
 			break;
 		}
 		//mismatch happened, game continues (also increment the guessed count)
+		hint++;
 		fails++;
-		cout << "Nope! Try again!" << endl;
+		
+		//May go overboard, punish the user anyway
+		if (ans > 100)
+			cout << "Input is way more than 100." << endl;
+
+		//This shouldn't happen but it could so punish user regardless
+		else if (ans < 0)
+			cout << "Input is a negative." << endl;
+		//In between, return default try again message.
+		else
+			cout << "Nope! Try again!" << endl;
+		
 
 		//Give hint to user every "ten" times
-		if (fails == 10) {
+		if (hint == 10) {
 			if (ans < num)
 				cout << "Hint: The number is higher than your current guess." << endl;
 			else
 				cout << "Hint: The number is lower than your current guess." << endl;
-			fails = 0;
+			hint = 0;
 		}
 	}
 }
