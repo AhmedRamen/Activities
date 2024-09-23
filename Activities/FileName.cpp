@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <typeinfo>
 
 using namespace std;
 void assignmentTwelve(); //get factorial number from input
@@ -10,7 +9,7 @@ void assignmentFourteen(); //create a random number game using a while loop
 int main() {
 	//assignmentTwelve();
 	//assignmentThirteen();
-	assignmentFourteen();
+	//assignmentFourteen();
 	return 0;
 }
 
